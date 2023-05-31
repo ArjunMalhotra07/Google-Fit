@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:withstand_fitness_project/screens/home_page.dart';
+import 'package:withstand_fitness_project/screens/sendGeolocation.dart';
 
 import 'health.dart';
 
@@ -21,7 +22,7 @@ class MyBottomNavigationBar extends StatefulWidget {
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
-  final List<Widget> _pages = [HomePage(), Page1()];
+  final List<Widget> _pages = [const FindLocation(), const HomePage()];
 
   void _onItemTapped(int index) {
     setState(() {

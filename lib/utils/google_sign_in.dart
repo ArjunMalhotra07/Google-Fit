@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:withstand_fitness_project/utils/constants.dart';
@@ -32,5 +33,24 @@ class GoogleSignInProvider extends ChangeNotifier {
     await _googleSignIn.disconnect();
     FirebaseAuth.instance.signOut();
     Constants().showSnackBar("Signing you out...", context);
+  }
+
+  Future<Position> getCurrentLocation() async {
+    bool isServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!isServiceEnabled) {
+      return Future.error('Location Services are disabled');
+    }
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location Permission Denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('Location Services denied forever. Cannot fetch');
+    }
+    return await Geolocator.getCurrentPosition();
   }
 }
