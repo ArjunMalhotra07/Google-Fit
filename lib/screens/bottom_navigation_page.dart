@@ -21,7 +21,7 @@ class MyBottomNavigationBar extends StatefulWidget {
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
-  final List<Widget> _pages = [HomePage(), HealthApp()];
+  final List<Widget> _pages = [HomePage(), Page1()];
 
   void _onItemTapped(int index) {
     setState(() {
