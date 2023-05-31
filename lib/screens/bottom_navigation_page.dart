@@ -22,7 +22,7 @@ class MyBottomNavigationBar extends StatefulWidget {
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
-  final List<Widget> _pages = [const FindLocation(), const HomePage()];
+  final List<Widget> _pages = [const HomePage(), const FindLocation()];
 
   void _onItemTapped(int index) {
     setState(() {
